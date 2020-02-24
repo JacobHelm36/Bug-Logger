@@ -9,7 +9,7 @@
     "dev": "node index.js",
     "setup": "npm install"
   },
-  "author": "Boise Codeworks",
+  "author": "Jacob",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.1",
