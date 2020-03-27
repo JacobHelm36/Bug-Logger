@@ -8,11 +8,11 @@ export default class BugController {
       .Router()
       .get("", this.getAll)
       .get("/:id", this.getById)
-      .get("/:id/note", this.getNoteByBugId)
+      .get("/:id/notes", this.getNoteByBugId)
       .put("/:id", this.edit)
       .post("", this.create)
       .delete("/:id", this.delete)
-      .delete("/:id/note/:noteId", this.deleteNoteByBugId)
+      .delete("/:id/notes/:noteId", this.deleteNoteByBugId)
   }
 
   async getNoteByBugId(req, res, next) {
@@ -40,17 +40,14 @@ export default class BugController {
     }
   }
   async edit(req, res, next) {
-    let data = await bugService.edit(req.params.id, req.body)
-    if (data["closed"] == false) {
-      try{
+    //FIXME logic in the controller
+    try{
+      let data = await bugService.edit(req.params.id, req.body)
       res.send(data)
       } catch(error) {
         next(error)
       }
-    } else {
-      res.send("No further changes accepted")
     }
-  }
   async create(req, res, next) {
     try {
       let data = await bugService.create(req.body)

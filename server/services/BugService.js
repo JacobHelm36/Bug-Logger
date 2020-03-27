@@ -18,6 +18,15 @@ class BugService {
 
   async edit(id, update) {
     //NOTE {new: true} insures I get the object back after the change
+    let checkClosed = await _repository.findById(id)
+    if (checkClosed["closed"] == true) {
+      throw new Error("The bug has been fixed")
+    } else {
+      await _repository.findByIdAndUpdate(id, update)
+    }
+
+
+
     return await _repository.findByIdAndUpdate(id, update, { new: true });
     
   }
